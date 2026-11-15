@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CabiNova — Logiciel de conception de caissons et meubles</title>
+<meta name="description" content="CabiNova : conception 3D de caissons, liste de débit, plan de coupe, DXF et G-code pour CNC. Téléchargement et licences.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f7f5;--card:#fff;--ink:#12251f;--mut:#5a6d66;--line:#dbe5e0;--g1:#0f332d;--g2:#0f6b4f;--g3:#17a673;--acc:#e8a33d;--r:16px;--sh:0 10px 30px rgba(15,51,45,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,Cairo,system-ui,Segoe UI,sans-serif}
+[dir=rtl] body,[dir=rtl] input,[dir=rtl] select,[dir=rtl] textarea,[dir=rtl] button{font-family:Cairo,Inter,system-ui,sans-serif}
+a{color:inherit}.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(244,247,245,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;text-decoration:none;color:var(--g1)}
+.brand img{width:34px;height:34px;border-radius:9px}
+.nav nav{display:flex;gap:22px;margin-inline-start:auto}
+.nav nav a{text-decoration:none;color:var(--mut);font-weight:600;font-size:14.5px}.nav nav a:hover{color:var(--g2)}
+.lang{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font-weight:700;cursor:pointer;color:var(--g1)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:13px 26px;font-weight:700;font-size:15.5px;cursor:pointer;text-decoration:none;transition:.15s}
+.btn.p{background:linear-gradient(135deg,var(--g2),var(--g3));color:#fff;box-shadow:0 8px 20px rgba(23,166,115,.35)}.btn.p:hover{transform:translateY(-2px)}
+.btn.s{background:#fff;color:var(--g1);border:1px solid var(--line)}.btn.s:hover{border-color:var(--g3)}
+.hero{background:radial-gradient(1200px 500px at 80% -10%,#1b6a55 0,transparent 60%),linear-gradient(160deg,#0c2a25,#0f3d33);color:#fff;padding:70px 0 0;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1fr;gap:34px;text-align:center}
+.hero h1{font-size:clamp(32px,5vw,56px);line-height:1.12;margin:0 auto;max-width:820px;letter-spacing:-.02em;font-weight:800}
+.hero h1 em{font-style:normal;color:#6ee7b7}
+.hero p.lead{font-size:18px;color:#c9e3da;max-width:680px;margin:0 auto}
+.hero .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero .btn.s{background:transparent;color:#fff;border-color:#ffffff55}
+.ver{font-size:13px;color:#9bc7b8}
+.shot{max-width:1000px;margin:10px auto 0;border-radius:16px 16px 0 0;box-shadow:0 -10px 60px rgba(0,0,0,.45);border:1px solid #ffffff22;border-bottom:0;display:block;width:100%}
+section{padding:76px 0}section h2{font-size:clamp(26px,3.4vw,38px);margin:0 0 10px;letter-spacing:-.01em;color:var(--g1)}
+.sub{color:var(--mut);max-width:640px;margin:0 0 38px}
+.grid{display:grid;gap:18px}.g3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--sh)}
+.card .ic{width:46px;height:46px;border-radius:12px;background:#e3f4ec;display:grid;place-items:center;font-size:22px;margin-bottom:12px}
+.card h3{margin:0 0 6px;font-size:18px;color:var(--g1)}.card p{margin:0;color:var(--mut);font-size:14.5px}
+.steps{counter-reset:s}.step{position:relative;padding-inline-start:64px;margin-bottom:22px}
+.step:before{counter-increment:s;content:counter(s);position:absolute;inset-inline-start:0;top:0;width:44px;height:44px;border-radius:50%;background:var(--g2);color:#fff;font-weight:800;display:grid;place-items:center;font-size:18px}
+.step h3{margin:0 0 2px;font-size:18px}.step p{margin:0;color:var(--mut)}
+.dl{background:linear-gradient(135deg,#0c2a25,#0f4a3b);color:#fff;border-radius:24px;padding:40px;display:flex;gap:30px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.dl h2{color:#fff;margin:0 0 6px}.dl p{margin:0;color:#c9e3da}
+.dl small{display:block;color:#9bc7b8;margin-top:8px}
+.price{display:flex;flex-direction:column}.price.f{border:2px solid var(--g3);position:relative}
+.price .tag{position:absolute;top:-13px;inset-inline-start:22px;background:var(--acc);color:#2b1c00;font-weight:800;font-size:12px;padding:3px 12px;border-radius:999px}
+.price h3{font-size:20px}#priceGrid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}.price .amt{font-size:38px;font-weight:800;color:var(--g1);margin:8px 0 2px;letter-spacing:-.02em}.price .amt small{font-size:15px;color:var(--mut);font-weight:600}
+.price ul{list-style:none;padding:0;margin:14px 0 22px;color:var(--mut);font-size:14.5px;flex:1}
+.price li{padding:5px 0;padding-inline-start:24px;position:relative}.price li:before{content:"✓";position:absolute;inset-inline-start:0;color:var(--g3);font-weight:800}
+.form{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:start}
+@media(max-width:860px){.form{grid-template-columns:1fr}.nav nav{display:none}.nav .lang{margin-inline-start:auto}.dl{padding:26px}}
+label{display:block;font-weight:600;font-size:14px;margin:14px 0 5px}
+input,select,textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;font:inherit;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--g3);border-color:transparent}
+input.mono{font-family:ui-monospace,Consolas,monospace;letter-spacing:.06em;text-transform:uppercase}
+.err{color:#b42318;font-size:13px;min-height:18px;margin-top:4px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:560px){.row2{grid-template-columns:1fr}}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.note{background:#fff8e6;border:1px solid #f1dfae;border-radius:12px;padding:14px 16px;font-size:14px;color:#5b4400}
+.pay{margin-top:14px}.pay div{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14.5px}.pay div:last-child{border:0}.pay b{font-family:ui-monospace,Consolas,monospace}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}.faq summary{cursor:pointer;font-weight:700}.faq p{margin:8px 0 0;color:var(--mut)}
+footer{background:var(--g1);color:#a9c9bd;padding:34px 0;font-size:14px}footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.sig{font-family:'Segoe Script','Lucida Handwriting','Brush Script MT',cursive;color:#e5f5ee;font-size:20px}
+.toast{position:fixed;bottom:22px;inset-inline-start:50%;transform:translateX(-50%);background:var(--g1);color:#fff;padding:12px 20px;border-radius:999px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:99}.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<script src="config.js"></script>
+
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#top"><img src="logo.png" alt="">CabiNova</a>
+  <nav>
+    <a href="#features" data-i="n_feat"></a><a href="#install" data-i="n_inst"></a><a href="#pricing" data-i="n_price"></a><a href="#license" data-i="n_lic"></a><a href="#faq">FAQ</a>
+  </nav>
+  <button class="lang" id="langBtn">العربية</button>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+  <h1 data-h="h1"></h1>
+  <p class="lead" data-i="lead"></p>
+  <div class="cta">
+    <a class="btn p" id="dl1" href="#" download><span>⬇</span><span data-i="dl_btn"></span></a>
+    <a class="btn s" href="#license" data-i="get_lic"></a>
+  </div>
+  <div class="ver" id="verLine"></div>
+  <img class="shot" src="app.jpg" alt="CabiNova">
+</div></div>
+
+<section id="features"><div class="wrap">
+  <h2 data-i="f_t"></h2><p class="sub" data-i="f_s"></p>
+  <div class="grid g3" id="featGrid"></div>
+</div></section>
+
+<section id="install" style="background:#fff;border-block:1px solid var(--line)"><div class="wrap">
+  <h2 data-i="i_t"></h2><p class="sub" data-i="i_s"></p>
+  <div class="steps" id="stepList"></div>
+  <div class="dl">
+    <div><h2 data-i="dl_t"></h2><p data-i="dl_p"></p><small id="dlMeta"></small></div>
+    <a class="btn p" id="dl2" href="#" download>⬇ <span data-i="dl_btn"></span></a>
+  </div>
+</div></section>
+
+<section id="pricing"><div class="wrap">
+  <h2 data-i="p_t"></h2><p class="sub" data-i="p_s"></p>
+  <div class="grid g3" id="priceGrid"></div>
+</div></section>
+
+<section id="license" style="background:#fff;border-block:1px solid var(--line)"><div class="wrap">
+  <h2 data-i="l_t"></h2><p class="sub" data-i="l_s"></p>
+  <div class="form">
+    <div class="card">
+      <form id="f" novalidate>
+        <label data-i="f_name"></label><input id="fn" autocomplete="name">
+        <div class="row2">
+          <div><label data-i="f_phone"></label><input id="fp" autocomplete="tel" inputmode="tel"></div>
+          <div><label data-i="f_mail"></label><input id="fe" type="email" autocomplete="email"></div>
+        </div>
+        <label data-i="f_hw"></label><input id="fh" class="mono" placeholder="XXXXX-XXXXX-XXXXX-XXXXX" maxlength="23" spellcheck="false">
+        <div class="err" id="eh"></div>
+        <label data-i="f_plan"></label><select id="fl"></select>
+        <label data-i="f_msg"></label><textarea id="fm" rows="3"></textarea>
+        <div class="acts">
+          <button type="button" class="btn p" id="sendWa">💬 <span data-i="send_wa"></span></button>
+          <button type="button" class="btn s" id="sendMail">✉ <span data-i="send_mail"></span></button>
+          <button type="button" class="btn s" id="copyBtn">⧉ <span data-i="copy"></span></button>
+        </div>
+      </form>
+    </div>
+    <div>
+      <div class="card"><h3 data-i="how_hw_t" style="margin-top:0"></h3><ol id="hwHow" style="padding-inline-start:20px;color:var(--mut);margin:8px 0 0"></ol></div>
+      <div class="card" style="margin-top:18px"><h3 data-i="pay_t" style="margin-top:0"></h3><p style="color:var(--mut);margin:0 0 8px" data-i="pay_s"></p><div class="pay" id="payList"></div></div>
+      <div class="note" style="margin-top:18px" data-i="lic_note"></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="faq"><div class="wrap faq"><h2>FAQ</h2><p class="sub"></p><div id="faqList"></div></div></section>
+</main>
+
+<footer><div class="wrap"><div>© <span id="yr"></span> CabiNova · <span class="sig">Guebli Nedjmeddine</span></div><div data-i="foot"></div></div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const T={
+fr:{
+ n_feat:"Fonctionnalités",n_inst:"Installation",n_price:"Tarifs",n_lic:"Licence",
+ h1:"Concevez vos meubles en 3D, <em>produisez sans erreur</em>",
+ lead:"CabiNova dessine vos caissons en 3D et génère automatiquement la liste de débit, le plan de coupe, les perçages, les fichiers DXF et le G-code pour votre CNC.",
+ dl_btn:"Télécharger pour Windows",get_lic:"Obtenir une licence",
+ f_t:"Tout pour passer du dessin à la machine",f_s:"Un seul logiciel pour l'atelier : conception, quantités, devis et fabrication.",
+ feats:[["🧊","Conception 3D","Caissons, tiroirs, séparations (droites, inclinées, tournées), façades, pièces et cuisines complètes."],["📋","Liste de débit","Pièces, chants, panneaux et quincaillerie calculés automatiquement, avec rapports 2D et PDF."],["✂️","Plan de coupe","Optimisation de l'implantation sur panneaux pour réduire les chutes."],["🔩","Quincaillerie","Charnières, Minifix, tourillons, Rafix, Cabineo… avec détection des collisions."],["⚙️","DXF et G-code CNC","Fichiers DXF par pièce, perçages CNC ou multibroche au choix, biseaux marqués."],["💰","Devis","Prix des matières, façonnage et quincaillerie : un devis clair en quelques clics."]],
+ i_t:"Installation en 3 étapes",i_s:"Fonctionne sous Windows, sans connexion internet permanente.",
+ steps:[["Téléchargez le programme","Cliquez sur « Télécharger pour Windows » : un fichier ZIP à extraire (clic droit → Extraire tout) : il contient CabiNova_Setup.exe."],["Lancez l'installateur","Double-cliquez sur CabiNova_Setup.exe et suivez l'assistant (si Windows affiche « SmartScreen », cliquez sur Informations complémentaires → Exécuter quand même)."],["Activez votre licence","À la première ouverture, copiez votre code machine, envoyez-le-nous (formulaire ci-dessous) puis collez la clé reçue."]],
+ dl_t:"Dernière version",dl_p:"Installateur Windows complet. Les mises à jour suivantes se font en un clic depuis le logiciel.",
+ p_t:"Tarifs des licences",p_s:"Essayez gratuitement 5 jours, puis choisissez la durée. La licence est liée à votre ordinateur.",
+ plans:{t5:["Essai gratuit","Toutes les fonctions",["5 jours d'essai","1 ordinateur","Aucun paiement"]],m1:["1 mois","Pour un petit projet",["Toutes les fonctions","1 ordinateur","Support WhatsApp"]],m6:["6 mois","Le plus souple",["Toutes les fonctions","1 ordinateur","Mises à jour incluses"]],y1:["1 an","Meilleur prix",["Toutes les fonctions","1 ordinateur","Mises à jour incluses","Support WhatsApp"]]},
+ popular:"Populaire",buy:"Acheter",buyT:"Demander l'essai",
+ l_t:"Essai gratuit ou licence",l_s:"Remplissez le formulaire : votre demande est préparée et envoyée par WhatsApp ou par e-mail. Nous vous répondons avec votre clé.",
+ f_name:"Nom / société",f_phone:"Téléphone / WhatsApp",f_mail:"E-mail",f_hw:"Code machine (affiché au démarrage de CabiNova)",f_plan:"Licence souhaitée",f_msg:"Message (facultatif)",
+ send_wa:"Envoyer par WhatsApp",send_mail:"Envoyer par e-mail",copy:"Copier la demande",
+ how_hw_t:"Où trouver mon code machine ?",hw:["Installez et ouvrez CabiNova.","L'écran d'activation affiche « Code machine » (4 groupes de 5 caractères).","Copiez-le et collez-le dans le formulaire."],
+ pay_t:"Paiement",pay_s:"Effectuez le virement puis joignez le reçu à votre demande.",
+ lic_note:"⚠ La clé fonctionne uniquement sur l'ordinateur dont le code machine a été envoyé. Si vous changez d'ordinateur, contactez-nous.",
+ faq:[["Que se passe-t-il si je change d'ordinateur ?","La clé est liée à la machine. Envoyez-nous le nouveau code machine pour obtenir une nouvelle clé."],["Faut-il internet pour utiliser CabiNova ?","Non. Internet sert seulement à télécharger le logiciel et à vérifier les mises à jour."],["Mes projets sont-ils conservés lors d'une mise à jour ?","Oui. Vos projets restent sur votre ordinateur ; enregistrez-les avant de mettre à jour."],["Comment recevoir ma clé ?","Après réception de votre demande et du paiement, la clé vous est envoyée par WhatsApp ou e-mail."]],
+ foot:"Logiciel pour menuisiers, ateliers CNC et fabricants de meubles.",
+ verTxt:"Version",
+ ok:"Demande copiée",badhw:"Code machine invalide : 4 groupes de 5 caractères (0-9, A-F).",needname:"Veuillez saisir votre nom.",
+ msgHead:"Demande de licence CabiNova",trialHead:"Demande d'essai gratuit CabiNova (5 jours)"
+},
+ar:{
+ n_feat:"المزايا",n_inst:"التثبيت",n_price:"الأسعار",n_lic:"الترخيص",
+ h1:"صمّم أثاثك ثلاثي الأبعاد، <em>وأنتج دون أخطاء</em>",
+ lead:"يرسم CabiNova الكيسونات بثلاثة أبعاد ويُنتج تلقائياً قائمة القطع وخطة القص والثقوب وملفات DXF وG-code لماكينة CNC.",
+ dl_btn:"تحميل لنظام Windows",get_lic:"الحصول على ترخيص",
+ f_t:"كل ما تحتاجه من التصميم إلى الماكينة",f_s:"برنامج واحد للورشة: التصميم والكميات وعروض الأسعار والتصنيع.",
+ feats:[["🧊","تصميم ثلاثي الأبعاد","كيسونات وأدراج وفواصل (مستقيمة ومائلة ومدوّرة) وواجهات وقطع ومطابخ كاملة."],["📋","قائمة القطع","القطع والحواف والألواح والإكسسوارات تُحسب تلقائياً مع تقارير 2D وPDF."],["✂️","خطة القص","توزيع محسّن على الألواح لتقليل الفاقد."],["🔩","الإكسسوارات","مفصلات Minifix وأوتاد وRafix وCabineo… مع كشف التصادمات."],["⚙️","DXF وG-code","ملف DXF لكل قطعة، وثقوب CNC أو multibroche حسب الاختيار، وعلامات الشطب."],["💰","عروض الأسعار","أسعار المواد والتصنيع والإكسسوارات: عرض سعر واضح بنقرات قليلة."]],
+ i_t:"التثبيت في 3 خطوات",i_s:"يعمل على Windows دون حاجة لاتصال دائم بالإنترنت.",
+ steps:[["حمّل البرنامج","اضغط «تحميل لنظام Windows» لتحصل على ملف ZIP؛ فكّ ضغطه (زر أيمن ← استخراج الكل) تجد بداخله CabiNova_Setup.exe."],["شغّل المثبّت","انقر مرتين على CabiNova_Setup.exe واتبع المعالج (إذا ظهرت رسالة SmartScreen فاضغط «مزيد من المعلومات» ← «تشغيل على أي حال»)."],["فعّل الترخيص","عند أول تشغيل انسخ كود الجهاز وأرسله إلينا (النموذج أدناه) ثم الصق المفتاح الذي يصلك."]],
+ dl_t:"أحدث نسخة",dl_p:"مثبّت كامل لنظام Windows. التحديثات اللاحقة بنقرة واحدة من داخل البرنامج.",
+ p_t:"أسعار التراخيص",p_s:"جرّب مجاناً 5 أيام ثم اختر المدة المناسبة. الترخيص مرتبط بجهازك.",
+ plans:{t5:["نسخة تجريبية","كل الوظائف",["5 أيام تجربة","جهاز واحد","بدون دفع"]],m1:["شهر واحد","لمشروع صغير",["كل الوظائف","جهاز واحد","دعم عبر واتساب"]],m6:["6 أشهر","الأكثر مرونة",["كل الوظائف","جهاز واحد","تحديثات مشمولة"]],y1:["سنة كاملة","أفضل سعر",["كل الوظائف","جهاز واحد","تحديثات مشمولة","دعم عبر واتساب"]]},
+ popular:"الأكثر طلباً",buy:"شراء",buyT:"اطلب التجربة",
+ l_t:"تجربة مجانية أو ترخيص",l_s:"املأ النموذج ليُجهَّز طلبك ويُرسل عبر واتساب أو البريد، وسنردّ عليك بالمفتاح.",
+ f_name:"الاسم / المؤسسة",f_phone:"الهاتف / واتساب",f_mail:"البريد الإلكتروني",f_hw:"كود الجهاز (يظهر عند تشغيل CabiNova)",f_plan:"الترخيص المطلوب",f_msg:"رسالة (اختياري)",
+ send_wa:"إرسال عبر واتساب",send_mail:"إرسال بالبريد",copy:"نسخ الطلب",
+ how_hw_t:"أين أجد كود الجهاز؟",hw:["ثبّت CabiNova وافتحه.","تعرض شاشة التفعيل «Code machine» (4 مجموعات من 5 رموز).","انسخه والصقه في النموذج."],
+ pay_t:"الدفع",pay_s:"أجرِ التحويل ثم أرفق الوصل مع طلبك.",
+ lic_note:"⚠ المفتاح يعمل فقط على الجهاز الذي أُرسل كوده. إذا غيّرت الجهاز تواصل معنا.",
+ faq:[["ماذا لو غيّرت الجهاز؟","المفتاح مرتبط بالجهاز. أرسل لنا كود الجهاز الجديد لنصدر لك مفتاحاً جديداً."],["هل أحتاج الإنترنت لاستخدام CabiNova؟","لا. الإنترنت فقط لتحميل البرنامج وفحص التحديثات."],["هل تبقى مشاريعي عند التحديث؟","نعم. مشاريعك على جهازك؛ احفظها قبل التحديث."],["كيف يصلني المفتاح؟","بعد استلام الطلب والدفع نرسل المفتاح عبر واتساب أو البريد."]],
+ foot:"برنامج للنجّارين وورشات CNC ومصنّعي الأثاث.",
+ verTxt:"النسخة",
+ ok:"تم نسخ الطلب",badhw:"كود الجهاز غير صحيح: 4 مجموعات من 5 رموز (0-9 وA-F).",needname:"الرجاء إدخال الاسم.",
+ msgHead:"طلب ترخيص CabiNova",trialHead:"طلب نسخة تجريبية CabiNova (5 أيام)"
+}};
+let L=(localStorage.getItem("cnl")||((navigator.language||"").startsWith("ar")?"ar":"fr"));
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2200)}
+function render(){
+ const t=T[L];document.documentElement.lang=L;document.documentElement.dir=L==="ar"?"rtl":"ltr";
+ $("#langBtn").textContent=L==="ar"?"Français":"العربية";
+ $$("[data-i]").forEach(e=>e.textContent=t[e.dataset.i]);
+ $$("[data-h]").forEach(e=>e.innerHTML=t[e.dataset.h]);
+ $("#featGrid").innerHTML=t.feats.map(f=>`<div class="card"><div class="ic">${f[0]}</div><h3>${f[1]}</h3><p>${f[2]}</p></div>`).join("");
+ $("#stepList").innerHTML=t.steps.map(s=>`<div class="step"><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join("");
+ $("#priceGrid").innerHTML=CFG.plans.map(p=>{const x=t.plans[p.id];return `<div class="card price ${p.featured?"f":""}">${p.featured?`<span class="tag">${t.popular}</span>`:""}<h3>${x[0]}</h3><div style="color:var(--mut);font-size:14px">${x[1]}</div><div class="amt">${p.trial?(L==="ar"?"مجاني":"Gratuit"):p.price} <small>${p.per[L]}</small></div><ul>${x[2].map(i=>`<li>${i}</li>`).join("")}</ul><a class="btn ${p.featured?"p":"s"}" href="#license" data-plan="${p.id}">${p.trial?t.buyT:t.buy}</a></div>`}).join("");
+ const cur=$("#fl").value;
+ $("#fl").innerHTML=CFG.plans.map(p=>`<option value="${p.id}">${t.plans[p.id][0]} — ${p.trial?(L==="ar"?"مجاني":"gratuit"):p.price+" "+p.per[L]}</option>`).join("");if(cur)$("#fl").value=cur;
+ $("#hwHow").innerHTML=t.hw.map(i=>`<li>${i}</li>`).join("");
+ $("#payList").innerHTML=CFG.payments.map(p=>`<div><span>${p.name}</span><b>${p.value}</b></div>`).join("");
+ $("#faqList").innerHTML=t.faq.map(q=>`<details><summary>${q[0]}</summary><p>${q[1]}</p></details>`).join("");
+ $("#verLine").textContent="Windows 10 / 11 · 64 bits";
+ $("#dlMeta").textContent="ZIP · Windows 10 / 11";
+ $("#yr").textContent=new Date().getFullYear();
+}
+$("#langBtn").onclick=()=>{L=L==="ar"?"fr":"ar";try{localStorage.setItem("cnl",L)}catch(e){}render()};
+$$("#dl1,#dl2").forEach(a=>a.href=CFG.download);
+document.addEventListener("click",e=>{const a=e.target.closest("[data-plan]");if(a)$("#fl").value=a.dataset.plan});
+const hwEl=$("#fh");
+hwEl.addEventListener("input",()=>{let v=hwEl.value.toUpperCase().replace(/[^0-9A-F]/g,"").slice(0,20);hwEl.value=v.match(/.{1,5}/g)?.join("-")||"";$("#eh").textContent=""});
+function msg(){
+ const t=T[L],p=CFG.plans.find(x=>x.id===$("#fl").value),pn=t.plans[p.id][0];
+ const l=[`*${p.trial?t.trialHead:t.msgHead}*`,`${t.f_name}: ${$("#fn").value.trim()}`,`${t.f_phone}: ${$("#fp").value.trim()}`,`${t.f_mail}: ${$("#fe").value.trim()}`,`Code machine: ${hwEl.value}`,`${t.f_plan}: ${pn} (${p.trial?"gratuit":p.price+" "+p.per[L]})`];
+ const m=$("#fm").value.trim();if(m)l.push(m);return l.join("\n");
+}
+function valid(){
+ const t=T[L];
+ if(!$("#fn").value.trim()){toast(t.needname);$("#fn").focus();return false}
+ if(!/^[0-9A-F]{5}(-[0-9A-F]{5}){3}$/.test(hwEl.value)){$("#eh").textContent=t.badhw;hwEl.focus();return false}
+ return true;
+}
+$("#sendWa").onclick=()=>{if(valid())window.open("https://wa.me/"+CFG.whatsapp+"?text="+encodeURIComponent(msg()),"_blank")};
+$("#sendMail").onclick=()=>{if(valid())location.href="mailto:"+CFG.email+"?subject="+encodeURIComponent(msg().split("\n")[0].replace(/\*/g,""))+"&body="+encodeURIComponent(msg().replace(/\*/g,""))};
+$("#copyBtn").onclick=async()=>{if(!valid())return;try{await navigator.clipboard.writeText(msg());toast(T[L].ok)}catch(e){prompt("",msg())}};
+render();
+</script>
+</body>
+</html>
