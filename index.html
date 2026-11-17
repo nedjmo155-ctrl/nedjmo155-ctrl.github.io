@@ -254,8 +254,8 @@ $("#payBtn").onclick=async()=>{
   const j=await r.json().catch(()=>({}));
   if(j.ok&&j.key){showRes(t.ready,j.key,t.keyHow);b.disabled=false;return}
   if(j.ok&&j.url){try{localStorage.setItem("cnref",j.ref)}catch(e){}location.href=j.url;return}
-  toast(j.err==="trial_used"?t.trialUsed:j.err==="gateway"?t.gwErr:t.netErr);
- }catch(e){toast(t.netErr)}
+  toast(j.err==="trial_used"?t.trialUsed:j.err==="gateway"?t.gwErr:t.netErr+" ("+(j.err||r.status)+")");
+ }catch(e){toast(t.netErr+" ("+e.message+")")}
  b.disabled=false;
 };
 async function pollRef(ref){
