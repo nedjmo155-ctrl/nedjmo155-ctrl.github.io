@@ -15,6 +15,7 @@ const CFG={
     {name:"BNA (RIB)", value:"001 00438 0200009296 69"},
     {name:"Nom du titulaire", value:"Guebli Nedjmeddine"}
   ],
+  api:"https://cabinova-pay.nedjmeddineguebli42.workers.dev",                              // رابط خادم الدفع (Cloudflare Worker) — يُملأ بعد إنشائه، مثال: https://cabinova-pay.xxx.workers.dev
   download:"CabiNova_Setup.zip",
   version:"67"
 };

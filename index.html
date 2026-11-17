@@ -32,7 +32,7 @@ header.nav{position:sticky;top:0;z-index:50;background:rgba(244,247,245,.88);bac
 .hero .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .hero .btn.s{background:transparent;color:#fff;border-color:#ffffff55}
 .ver{font-size:13px;color:#9bc7b8}
-.shot{max-width:1000px;margin:10px auto 0;border-radius:16px 16px 0 0;box-shadow:0 -10px 60px rgba(0,0,0,.45);border:1px solid #ffffff22;border-bottom:0;display:block;width:100%}
+.shot{max-width:1000px;margin:10px auto 0;aspect-ratio:16/9;background:#0a1b17;border-radius:16px 16px 0 0;box-shadow:0 -10px 60px rgba(0,0,0,.45);border:1px solid #ffffff22;border-bottom:0;display:block;width:100%}
 section{padding:76px 0}section h2{font-size:clamp(26px,3.4vw,38px);margin:0 0 10px;letter-spacing:-.01em;color:var(--g1)}
 .sub{color:var(--mut);max-width:640px;margin:0 0 38px}
 .grid{display:grid;gap:18px}.g3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
@@ -87,7 +87,7 @@ footer{background:var(--g1);color:#a9c9bd;padding:34px 0;font-size:14px}footer .
     <a class="btn s" href="#license" data-i="get_lic"></a>
   </div>
   <div class="ver" id="verLine"></div>
-  <img class="shot" src="app.jpg" alt="CabiNova">
+  <video class="shot" src="CabiNova_Promo.mp4" poster="poster.jpg" autoplay muted loop playsinline controls preload="auto" aria-label="CabiNova"></video>
 </div></div>
 
 <section id="features"><div class="wrap">
@@ -111,6 +111,7 @@ footer{background:var(--g1);color:#a9c9bd;padding:34px 0;font-size:14px}footer .
 
 <section id="license" style="background:#fff;border-block:1px solid var(--line)"><div class="wrap">
   <h2 data-i="l_t"></h2><p class="sub" data-i="l_s"></p>
+  <div class="card" id="res" hidden style="margin-bottom:18px;border-color:#9fd6b8;background:#f2fbf6"><h3 id="resT" style="margin-top:0"></h3><textarea id="resK" readonly rows="4" class="mono" style="display:none;width:100%"></textarea><p id="resN" style="color:var(--mut);margin:8px 0 0"></p><div class="acts" id="resA" style="display:none"><button type="button" class="btn p" id="resC">⧉ <span data-i="copy"></span></button></div></div>
   <div class="form">
     <div class="card">
       <form id="f" novalidate>
@@ -123,6 +124,11 @@ footer{background:var(--g1);color:#a9c9bd;padding:34px 0;font-size:14px}footer .
         <div class="err" id="eh"></div>
         <label data-i="f_plan"></label><select id="fl"></select>
         <label data-i="f_msg"></label><textarea id="fm" rows="3"></textarea>
+        <div id="payBox" hidden>
+          <label data-i="pmL"></label><select id="pm"><option value="edahabia">EDAHABIA (Algérie Poste)</option><option value="cib">CIB</option></select>
+          <div class="acts"><button type="button" class="btn p" id="payBtn" style="font-size:17px;padding:14px 22px">💳 <span id="payTxt"></span></button></div>
+          <p style="color:var(--mut);font-size:14px;margin:18px 0 0" data-i="or"></p>
+        </div>
         <div class="acts">
           <button type="button" class="btn p" id="sendWa">💬 <span data-i="send_wa"></span></button>
           <button type="button" class="btn s" id="sendMail">✉ <span data-i="send_mail"></span></button>
@@ -163,7 +169,7 @@ fr:{
  f_name:"Nom / société",f_phone:"Téléphone / WhatsApp",f_mail:"E-mail",f_hw:"Code machine (affiché au démarrage de CabiNova)",f_plan:"Licence souhaitée",f_msg:"Message (facultatif)",
  send_wa:"Envoyer par WhatsApp",send_mail:"Envoyer par e-mail",copy:"Copier la demande",
  how_hw_t:"Où trouver mon code machine ?",hw:["Installez et ouvrez CabiNova.","L'écran d'activation affiche « Code machine » (4 groupes de 5 caractères).","Copiez-le et collez-le dans le formulaire."],
- pay_t:"Paiement",pay_s:"Effectuez le virement puis joignez le reçu à votre demande.",
+ pay_t:"Paiement",payNow:"Payer maintenant et recevoir la clé",getTrial:"Recevoir l’essai gratuit",pmL:"Carte de paiement",or:"ou envoyez la demande manuellement :",wait:"Paiement en cours de confirmation… ne fermez pas cette page.",ready:"Paiement confirmé — voici votre clé de licence",keyHow:"Copiez cette clé puis collez-la dans l’écran d’activation de CabiNova. Elle ne fonctionne que sur l’ordinateur dont vous avez indiqué le code.",keySave:"Conservez cette page : le lien reste valable pour retrouver votre clé.",trialUsed:"L’essai gratuit a déjà été utilisé pour cet ordinateur.",gwErr:"Service de paiement indisponible. Réessayez ou utilisez l’envoi manuel.",netErr:"Erreur réseau. Réessayez.",late:"Confirmation plus longue que prévu. Rechargez cette page dans quelques minutes (votre clé apparaîtra ici).",pay_s:"Effectuez le virement puis joignez le reçu à votre demande.",
  lic_note:"⚠ La clé fonctionne uniquement sur l'ordinateur dont le code machine a été envoyé. Si vous changez d'ordinateur, contactez-nous.",
  faq:[["Que se passe-t-il si je change d'ordinateur ?","La clé est liée à la machine. Envoyez-nous le nouveau code machine pour obtenir une nouvelle clé."],["Faut-il internet pour utiliser CabiNova ?","Non. Internet sert seulement à télécharger le logiciel et à vérifier les mises à jour."],["Mes projets sont-ils conservés lors d'une mise à jour ?","Oui. Vos projets restent sur votre ordinateur ; enregistrez-les avant de mettre à jour."],["Comment recevoir ma clé ?","Après réception de votre demande et du paiement, la clé vous est envoyée par WhatsApp ou e-mail."]],
  foot:"Logiciel pour menuisiers, ateliers CNC et fabricants de meubles.",
@@ -188,7 +194,7 @@ ar:{
  f_name:"الاسم / المؤسسة",f_phone:"الهاتف / واتساب",f_mail:"البريد الإلكتروني",f_hw:"كود الجهاز (يظهر عند تشغيل CabiNova)",f_plan:"الترخيص المطلوب",f_msg:"رسالة (اختياري)",
  send_wa:"إرسال عبر واتساب",send_mail:"إرسال بالبريد",copy:"نسخ الطلب",
  how_hw_t:"أين أجد كود الجهاز؟",hw:["ثبّت CabiNova وافتحه.","تعرض شاشة التفعيل «Code machine» (4 مجموعات من 5 رموز).","انسخه والصقه في النموذج."],
- pay_t:"الدفع",pay_s:"أجرِ التحويل ثم أرفق الوصل مع طلبك.",
+ pay_t:"الدفع",payNow:"ادفع الآن واحصل على المفتاح",getTrial:"احصل على التجربة المجانية",pmL:"بطاقة الدفع",or:"أو أرسل الطلب يدوياً:",wait:"جارٍ تأكيد الدفع… لا تغلق هذه الصفحة.",ready:"تم تأكيد الدفع — هذا هو مفتاح الترخيص",keyHow:"انسخ هذا المفتاح والصقه في شاشة التفعيل داخل CabiNova. يعمل فقط على الجهاز الذي أدخلت رمزه.",keySave:"احتفظ بهذه الصفحة: الرابط يبقى صالحاً لاسترجاع مفتاحك.",trialUsed:"تم استعمال التجربة المجانية سابقاً على هذا الجهاز.",gwErr:"خدمة الدفع غير متاحة حالياً. حاول لاحقاً أو استعمل الإرسال اليدوي.",netErr:"خطأ في الاتصال. حاول مرة أخرى.",late:"التأكيد يتأخر أكثر من المتوقع. أعد تحميل الصفحة بعد دقائق وسيظهر مفتاحك هنا.",pay_s:"أجرِ التحويل ثم أرفق الوصل مع طلبك.",
  lic_note:"⚠ المفتاح يعمل فقط على الجهاز الذي أُرسل كوده. إذا غيّرت الجهاز تواصل معنا.",
  faq:[["ماذا لو غيّرت الجهاز؟","المفتاح مرتبط بالجهاز. أرسل لنا كود الجهاز الجديد لنصدر لك مفتاحاً جديداً."],["هل أحتاج الإنترنت لاستخدام CabiNova؟","لا. الإنترنت فقط لتحميل البرنامج وفحص التحديثات."],["هل تبقى مشاريعي عند التحديث؟","نعم. مشاريعك على جهازك؛ احفظها قبل التحديث."],["كيف يصلني المفتاح؟","بعد استلام الطلب والدفع نرسل المفتاح عبر واتساب أو البريد."]],
  foot:"برنامج للنجّارين وورشات CNC ومصنّعي الأثاث.",
@@ -235,7 +241,33 @@ function valid(){
 $("#sendWa").onclick=()=>{if(valid())window.open("https://wa.me/"+CFG.whatsapp+"?text="+encodeURIComponent(msg()),"_blank")};
 $("#sendMail").onclick=()=>{if(valid())location.href="mailto:"+CFG.email+"?subject="+encodeURIComponent(msg().split("\n")[0].replace(/\*/g,""))+"&body="+encodeURIComponent(msg().replace(/\*/g,""))};
 $("#copyBtn").onclick=async()=>{if(!valid())return;try{await navigator.clipboard.writeText(msg());toast(T[L].ok)}catch(e){prompt("",msg())}};
+const API=(CFG.api||"").replace(/\/$/,"");
+function showRes(t,k,n){const r=$("#res");r.hidden=false;$("#resT").textContent=t;const kk=$("#resK");kk.style.display=k?"block":"none";kk.value=k||"";$("#resA").style.display=k?"flex":"none";$("#resN").textContent=n||"";r.scrollIntoView({behavior:"smooth",block:"center"})}
+function payUi(){if(!API)return;$("#payBox").hidden=false;const p=CFG.plans.find(x=>x.id===$("#fl").value);$("#payTxt").textContent=p&&p.trial?T[L].getTrial:T[L].payNow}
+$("#fl").addEventListener("change",payUi);
+const _r=render;render=function(){_r();payUi()};
+$("#resC").onclick=async()=>{try{await navigator.clipboard.writeText($("#resK").value);toast(T[L].ok)}catch(e){$("#resK").select();document.execCommand("copy")}};
+$("#payBtn").onclick=async()=>{
+ if(!valid())return;const t=T[L],p=CFG.plans.find(x=>x.id===$("#fl").value);const b=$("#payBtn");b.disabled=true;
+ try{
+  const r=await fetch(API+"/order",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name:$("#fn").value.trim(),phone:$("#fp").value.trim(),email:$("#fe").value.trim(),hw:hwEl.value,plan:p.id,pm:$("#pm").value,lang:L})});
+  const j=await r.json().catch(()=>({}));
+  if(j.ok&&j.key){showRes(t.ready,j.key,t.keyHow);b.disabled=false;return}
+  if(j.ok&&j.url){try{localStorage.setItem("cnref",j.ref)}catch(e){}location.href=j.url;return}
+  toast(j.err==="trial_used"?t.trialUsed:j.err==="gateway"?t.gwErr:t.netErr);
+ }catch(e){toast(t.netErr)}
+ b.disabled=false;
+};
+async function pollRef(ref){
+ const t=T[L];showRes(t.wait,"","");
+ for(let i=0;i<100;i++){
+  try{const j=await (await fetch(API+"/key?ref="+ref)).json();if(j.status==="paid"){showRes(t.ready,j.key,t.keyHow+"\n"+t.keySave);return}if(j.status==="none")return}catch(e){}
+  await new Promise(r=>setTimeout(r,3000));
+ }
+ showRes(t.late,"","");
+}
 render();
+if(API){const ref=new URLSearchParams(location.search).get("ref");if(/^[0-9a-f]{32}$/.test(ref||""))pollRef(ref)}
 </script>
 </body>
 </html>
