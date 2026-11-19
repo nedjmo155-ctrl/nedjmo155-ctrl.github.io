@@ -2,6 +2,9 @@
 <html lang="fr" dir="ltr">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-ubPF7nOiUsQgTyQCLuCC0IJzDncuW+FxCA2tlA0v8gs=' 'sha256-8kmBheyswYEaR/2CppbR6P6crHinIxCrtHr7tLjpvPk='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://cabinova-pay.nedjmeddineguebli42.workers.dev; form-action 'none'; base-uri 'none'; object-src 'none'; manifest-src 'none'">
+<meta name="referrer" content="no-referrer">
+<script>if(top!==self){document.documentElement.style.display='none';top.location=self.location}</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CabiNova — Logiciel de conception de caissons et meubles</title>
 <meta name="description" content="CabiNova : conception 3D de caissons, liste de débit, plan de coupe, DXF et G-code pour CNC. Téléchargement et licences.">
@@ -99,7 +102,7 @@ footer{background:var(--g1);color:#a9c9bd;padding:34px 0;font-size:14px}footer .
   <h2 data-i="i_t"></h2><p class="sub" data-i="i_s"></p>
   <div class="steps" id="stepList"></div>
   <div class="dl">
-    <div><h2 data-i="dl_t"></h2><p data-i="dl_p"></p><small id="dlMeta"></small></div>
+    <div><h2 data-i="dl_t"></h2><p data-i="dl_p"></p><small id="dlMeta"></small><small id="shaMeta" style="display:block;margin-top:4px;font-family:monospace;font-size:11px;word-break:break-all;opacity:.75"></small></div>
     <a class="btn p" id="dl2" href="#" download>⬇ <span data-i="dl_btn"></span></a>
   </div>
 </div></section>
@@ -223,7 +226,7 @@ function render(){
  $("#yr").textContent=new Date().getFullYear();
 }
 $("#langBtn").onclick=()=>{L=L==="ar"?"fr":"ar";try{localStorage.setItem("cnl",L)}catch(e){}render()};
-$$("#dl1,#dl2").forEach(a=>a.href=CFG.download);
+$$("#dl1,#dl2").forEach(a=>a.href=CFG.download);if(CFG.sha256)$("#shaMeta").textContent="SHA-256 : "+CFG.sha256;
 document.addEventListener("click",e=>{const a=e.target.closest("[data-plan]");if(a)$("#fl").value=a.dataset.plan});
 const hwEl=$("#fh");
 hwEl.addEventListener("input",()=>{let v=hwEl.value.toUpperCase().replace(/[^0-9A-F]/g,"").slice(0,20);hwEl.value=v.match(/.{1,5}/g)?.join("-")||"";$("#eh").textContent=""});
